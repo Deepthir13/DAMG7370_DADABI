@@ -1,5 +1,5 @@
 {
-	"name": "DelimitedText1",
+	"name": "Seattle_Pet_LIC_Updated",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "AzureDataLakeStorage_LS",
