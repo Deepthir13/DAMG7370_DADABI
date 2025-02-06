@@ -33,6 +33,12 @@
 							"type": "ParquetReadSettings"
 						}
 					},
+					"sink": {
+						"type": "SnowflakeV2Sink",
+						"importSettings": {
+							"type": "SnowflakeImportCopyCommand"
+						}
+					},
 					"enableStaging": true,
 					"stagingSettings": {
 						"linkedServiceName": {
@@ -51,6 +57,12 @@
 								"type": "Expression"
 							}
 						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "SnowflakeTable1",
+						"type": "DatasetReference"
 					}
 				]
 			},
