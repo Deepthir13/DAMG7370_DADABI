@@ -24,6 +24,22 @@
 				"typeProperties": {
 					"source": {
 						"type": "ParquetSource",
+						"additionalColumns": [
+							{
+								"name": "Job_ID",
+								"value": {
+									"value": "@pipeline().RunId",
+									"type": "Expression"
+								}
+							},
+							{
+								"name": "Load_Date",
+								"value": {
+									"value": "@utcNow()",
+									"type": "Expression"
+								}
+							}
+						],
 						"storeSettings": {
 							"type": "AzureBlobFSReadSettings",
 							"recursive": false,
@@ -44,7 +60,8 @@
 						"linkedServiceName": {
 							"referenceName": "AzureBlobStorage1",
 							"type": "LinkedServiceReference"
-						}
+						},
+						"path": ""
 					}
 				},
 				"inputs": [
@@ -62,7 +79,11 @@
 				"outputs": [
 					{
 						"referenceName": "SnowflakeTable1",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"Schema_Name": "TEMP_SCHEMA",
+							"Table_Name": "PET_LICENSE_STAGE"
+						}
 					}
 				]
 			},
@@ -111,7 +132,7 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "DelimitedText1",
+						"referenceName": "Seattle_LIC_Updated",
 						"type": "DatasetReference"
 					}
 				],
