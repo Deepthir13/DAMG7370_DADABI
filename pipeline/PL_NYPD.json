@@ -1,0 +1,290 @@
+{
+	"name": "PL_NYPD",
+	"properties": {
+		"activities": [
+			{
+				"name": "Parquet to Snowflake",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "ParquetSource",
+						"additionalColumns": [
+							{
+								"name": "JOB_ID",
+								"value": {
+									"value": "@pipeline().RunId",
+									"type": "Expression"
+								}
+							},
+							{
+								"name": "LOAD_DT",
+								"value": {
+									"value": "@utcNow()",
+									"type": "Expression"
+								}
+							}
+						],
+						"storeSettings": {
+							"type": "AzureBlobFSReadSettings",
+							"recursive": false,
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "ParquetReadSettings"
+						}
+					},
+					"sink": {
+						"type": "SnowflakeV2Sink",
+						"importSettings": {
+							"type": "SnowflakeImportCopyCommand"
+						}
+					},
+					"enableStaging": true,
+					"stagingSettings": {
+						"linkedServiceName": {
+							"referenceName": "AzureBlobStorage1",
+							"type": "LinkedServiceReference"
+						}
+					},
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "ARREST_KEY",
+									"type": "String"
+								},
+								"sink": {
+									"name": "ARREST_KEY",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "PD_CD",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "PD_CD",
+									"type": "Int64"
+								}
+							},
+							{
+								"source": {
+									"name": "PD_DESC",
+									"type": "String"
+								},
+								"sink": {
+									"name": "PD_DESC",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "KY_CD",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "KY_CD",
+									"type": "Int64"
+								}
+							},
+							{
+								"source": {
+									"name": "OFNS_DESC",
+									"type": "String"
+								},
+								"sink": {
+									"name": "OFNS_DESC",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "LAW_CODE",
+									"type": "String"
+								},
+								"sink": {
+									"name": "LAW_CODE",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "LAW_CAT_CD",
+									"type": "String"
+								},
+								"sink": {
+									"name": "LAW_CAT_CD",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "ARREST_BORO",
+									"type": "String"
+								},
+								"sink": {
+									"name": "ARREST_BORO",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "ARREST_PRECINCT",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "ARREST_PRECINCT",
+									"type": "Int64"
+								}
+							},
+							{
+								"source": {
+									"name": "JURISDICTION_CODE",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "JURISDICTION_CODE",
+									"type": "Int64"
+								}
+							},
+							{
+								"source": {
+									"name": "AGE_GROUP",
+									"type": "String"
+								},
+								"sink": {
+									"name": "AGE_GROUP",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "PERP_SEX",
+									"type": "String"
+								},
+								"sink": {
+									"name": "PERP_SEX",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "PERP_RACE",
+									"type": "String"
+								},
+								"sink": {
+									"name": "PERP_RACE",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "X_COORD_CD",
+									"type": "Int64"
+								},
+								"sink": {
+									"name": "X_COORD_CD",
+									"type": "Double"
+								}
+							},
+							{
+								"source": {
+									"name": "Y_COORD_CD",
+									"type": "Int64"
+								},
+								"sink": {
+									"name": "Y_COORD_CD",
+									"type": "Double"
+								}
+							},
+							{
+								"source": {
+									"name": "LATITUDE",
+									"type": "Single"
+								},
+								"sink": {
+									"name": "LATITUDE",
+									"type": "Double"
+								}
+							},
+							{
+								"source": {
+									"name": "LONGITUDE",
+									"type": "Single"
+								},
+								"sink": {
+									"name": "LONGITUDE",
+									"type": "Double"
+								}
+							},
+							{
+								"source": {
+									"name": "GEOREFERENCED",
+									"type": "String"
+								},
+								"sink": {
+									"name": "GEOREFERENCED",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "ARREST_DATE_Formatted",
+									"type": "DateTime"
+								},
+								"sink": {
+									"name": "ARREST_DATE_FORMATED",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"name": "JOB_ID",
+									"type": "String"
+								},
+								"sink": {
+									"name": "JOB_ID",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "LOAD_DT",
+									"type": "String"
+								},
+								"sink": {
+									"name": "LOAD_DT",
+									"type": "DateTime"
+								}
+							}
+						]
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "Parquet_altryx",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "SnowflakeNYPD2",
+						"type": "DatasetReference"
+					}
+				]
+			}
+		],
+		"annotations": []
+	}
+}
