@@ -1,0 +1,20 @@
+{
+	"name": "Parquet_altryx",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureDataLakeStorage_LS",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "NYPD_Parquet_Data.parquet",
+				"fileSystem": "silver"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": []
+	}
+}
