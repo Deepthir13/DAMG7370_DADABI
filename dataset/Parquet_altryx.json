@@ -10,7 +10,7 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
-				"fileName": "NYPD_Parquet_Data.parquet",
+				"fileName": "NYPD_Parquet_Data2.parquet",
 				"fileSystem": "silver"
 			},
 			"compressionCodec": "snappy"
